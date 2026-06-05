@@ -1,4 +1,6 @@
 import reflex as rx
+from nuevo_curso_reflex.navigation.state import NavState
+from nuevo_curso_reflex.navigation import routes
 
 
 def navbar_link(text: str, url: str) -> rx.Component:
@@ -27,7 +29,7 @@ def navbar() -> rx.Component:
                     align_items="center",
                 ),
                 rx.hstack(
-                    navbar_link("Home", "/"),
+                    navbar_link("Home", routes.HOME),
                     rx.menu.root(
                         rx.menu.trigger(
                             rx.button(
@@ -44,7 +46,10 @@ def navbar() -> rx.Component:
                             rx.menu.item("Servicio 3"),
                         ),
                     ),
-                    navbar_link("Base de Datos", "/database"),
+                    navbar_link(
+                        "Base de Datos",
+                        routes.DATABASE
+                    ),
                     justify="end",
                     spacing="5",
                 ),
@@ -67,7 +72,10 @@ def navbar() -> rx.Component:
                 rx.menu.root(
                     rx.menu.trigger(rx.icon("menu", size=30)),
                     rx.menu.content(
-                        rx.menu.item("Home"),
+                        rx.menu.item(
+                            "Home",
+                            on_click=NavState.to_home
+                        ),
                         rx.menu.sub(
                             rx.menu.sub_trigger("Servicios"),
                             rx.menu.sub_content(
@@ -76,7 +84,10 @@ def navbar() -> rx.Component:
                                 rx.menu.item("Servicio 3"),
                             ),
                         ),
-                        rx.menu.item("Base de Datos"),
+                        rx.menu.item(
+                            "Base de Datos",
+                            on_click=NavState.to_data_base
+                        ),
                     ),
                     justify="end",
                 ),
